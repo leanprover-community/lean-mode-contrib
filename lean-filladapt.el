@@ -2,7 +2,7 @@
 
 ;; Copyright (C) 2018 Joseph Corneli
 ;; Author: Joseph Corneli <holtzermann17@gmail.com>
-;; Package-Requires: ((lean-mode "20180906.1645") (filladapt "2.12.2") (diminish "0.44")
+;; Package-Requires: (lean-mode "20180906.1645") (filladapt "2.12.2") (diminish "0.44")
 ;; Version: 1.0
 
 ;; This program is free software; you can redistribute it and/or modify

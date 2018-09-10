@@ -20,17 +20,48 @@
 
 ;;; Documentation:
 
-;; Use filladapt to improve the way Lean fills long comment strings.
-;; It now works intelligently with both kinds of comments.
+;; Use filladapt to improve the way Emacs fills long comment strings
+;; in Lean Mode.  It now works intelligently with both "block" and
+;; "inline" comments.  This avoids formatting errors that can confuse
+;; Lean!  Consider the following example:
 
-;; In particular, you will see the right behaviour for both of these:
+;; SAMPLE TEXT
 
 ;;   -- This is a long inline comment This is a long inline comment This is a long inline comment This is a long inline comment This is a long inline comment
-
+;;
 ;;   /- This is a long block comment This is a long block comment This is a long block comment This is a long block comment This is a long block comment -/
+;;
+;; #print "this is a string"
 
-;; (That's an improvement over the out-of-the-box behaviour of
-;; lean-mode, which gets the second one wrong.)
+;; DEFAULT BEHAVIOUR OF M-q (WITHOUT LEAN-FILLADAPT):
+
+;; -- This is a long comment This is a long comment This is a long
+;; -- comment This is a long comment This is a long comment This is a
+;; -- long comment This is a long comment
+;;
+;; /- This is a long comment This is a long comment This is a long
+;; /- comment This is a long comment This is a long comment This is a
+;; /- long comment This is a long comment -/
+;;
+;; #print "this is a string"
+
+;; The block comment is filled incorrectly and Lean gets confused!
+;; The #print command won't run when you move the cursor to its line!
+
+;; IMPROVED BEHAVIOUR OF M-q (WITH LEAN-FILLADAPT):
+
+;; -- This is a long comment This is a long comment This is a long
+;; -- comment This is a long comment This is a long comment This is a
+;; -- long comment This is a long comment
+;;
+;; /- This is a long comment This is a long comment This is a long
+;; comment This is a long comment This is a long comment This is a long
+;; comment This is a long comment -/
+;;
+;; #print "this is a string"
+
+;; Now both kinds of comments are filled correctly, and Lean is happy.
+;; The #print command now works as expected!
 
 ;;; Code:
 
@@ -69,3 +100,4 @@
 
 (add-hook 'lean-mode-hook #'set-lean-filladapt-token-table)
 
+(provide 'lean-filladapt)
